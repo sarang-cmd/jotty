@@ -451,7 +451,7 @@ function bannerTree() {
         t("Your attention leaves the page.", { fontFamily: serif, fontSize: 64, lineHeight: 1.05, letterSpacing: "-0.02em" }),
         t("Jotty notices, and asks about it tomorrow.", { fontFamily: serif, fontSize: 64, lineHeight: 1.05, color: C.moss, letterSpacing: "-0.02em" }),
         t("A local-first study coach for Chrome. No account, no server, MIT licensed.", { fontSize: 18, color: C.soft, marginTop: 26 }),
-        t("jotty.vercel.app", { fontFamily: mono, fontSize: 13, color: C.muted, marginTop: 34 }),
+        t("jotty-five.vercel.app", { fontFamily: mono, fontSize: 13, color: C.muted, marginTop: 34 }),
       ]),
       img(logoData, 380, 312, { opacity: 0.98 }),
     ]
@@ -497,7 +497,7 @@ function storeShot(label, headline, src, nativeWidth, nativeHeight) {
     [
       box({ display: "flex", alignItems: "center", justifyContent: "space-between" }, [
         t(label, { fontFamily: mono, fontSize: 11, letterSpacing: "0.12em", color: C.muted }),
-        t("jotty.vercel.app", { fontFamily: mono, fontSize: 11, color: C.muted }),
+        t("jotty-five.vercel.app", { fontFamily: mono, fontSize: 11, color: C.muted }),
       ]),
       t(headline, { fontFamily: serif, fontSize: 34, lineHeight: 1.15, color: C.ink, marginTop: 12 }),
       box(

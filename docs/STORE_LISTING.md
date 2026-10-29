@@ -86,7 +86,7 @@ The screenshots are interface previews rendered from the shipped palette and typ
 
 ## Privacy policy URL
 
-`https://jotty.vercel.app/privacy-policy.html`
+`https://jotty-five.vercel.app/privacy-policy.html`
 
 ## Support URL
 
