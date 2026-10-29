@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/assets/logo.svg" width="96" height="96" alt="Jotty mascot: a sage-green blob holding a pencil over an open notebook" />
+<img src="docs/assets/mascot-512.png" width="150" alt="Jotty mascot: a sage-green blob holding a pencil over an open notebook" />
 
 # Jotty
 
@@ -323,8 +323,10 @@ Search results are cached in memory for thirty minutes. Quota use is counted and
 │       ├── storage.js              # one versioned object + guarded key reader
 │       └── text.js                 # tokenising, stemming, dates, durations
 ├── tests/                          # 66 Node tests: logic, storage, security, pipeline
+├── assets/brand/mascot.png         # source illustration, composited on paper
 ├── tools/
 │   ├── build-assets.mjs            # rasterises icons, favicons, badges
+│   ├── build-mascot.mjs             # resizes the illustrated mascot
 │   ├── build-previews.mjs          # renders README and store previews with satori
 │   ├── check-docs.mjs              # link, asset, a11y and copy checks for docs/
 │   └── render-svg.mjs              # small SVG to PNG helper
@@ -335,7 +337,8 @@ Search results are cached in memory for thirty minutes. Quota use is counted and
     ├── site.js                     # demo wiring; no third-party code
     ├── assets/
     │   ├── engine.js               # generated demo bundle
-    │   ├── logo.svg, icon.svg      # mascot and simplified mark
+    │   ├── mascot-512.png, mascot-256.png  # illustrated mascot
+    │   ├── icon.svg                # simplified toolbar mark
     │   ├── fonts/                  # self-hosted woff2 (no font CDN)
     │   ├── screenshots/            # interface previews used above
     │   ├── architecture.svg

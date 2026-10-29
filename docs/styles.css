@@ -1820,6 +1820,12 @@ button {
   }
 }
 
+.footer-mascot {
+  display: block;
+  margin: 0 0 14px -6px;
+  border-radius: 4px;
+}
+
 .footer-brand p {
   font-size: 13px;
   color: var(--muted);
