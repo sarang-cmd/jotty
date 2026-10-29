@@ -11,17 +11,17 @@
 - Input to the page judge: page title, URL, channel name on YouTube, description meta tag. No page body.
 - Focus Player: YouTube Data API v3 search with the user's own key; playback through youtube-nocookie.com with related videos limited.
 - Version: 1.0.0
-- Download: https://jotty.vercel.app/releases/jotty-v1.0.0.zip (unpacked extension, MIT)
+- Download: https://jotty-five.vercel.app/releases/jotty-v1.0.0.zip (unpacked extension, MIT)
 - Source: https://github.com/sarang-cmd/jotty
-- Website: https://jotty.vercel.app
-- Privacy: https://jotty.vercel.app/privacy-policy.html
-- Terms: https://jotty.vercel.app/terms.html
+- Website: https://jotty-five.vercel.app
+- Privacy: https://jotty-five.vercel.app/privacy-policy.html
+- Terms: https://jotty-five.vercel.app/terms.html
 
 ## Pages
 
-- [Home](https://jotty.vercel.app/): product explanation and three working examples that run the same judge as the extension.
-- [Morning reflection guide](https://jotty.vercel.app/guides/morning-reflection/)
-- [YouTube without the feed](https://jotty.vercel.app/guides/youtube-without-the-feed/)
-- [Create a free YouTube Data API key](https://jotty.vercel.app/guides/youtube-data-api-key/)
-- [Write a task line the judge can use](https://jotty.vercel.app/guides/focus-session-setup/)
-- [What Jotty stores](https://jotty.vercel.app/guides/what-jotty-stores/)
+- [Home](https://jotty-five.vercel.app/): product explanation and three working examples that run the same judge as the extension.
+- [Morning reflection guide](https://jotty-five.vercel.app/guides/morning-reflection/)
+- [YouTube without the feed](https://jotty-five.vercel.app/guides/youtube-without-the-feed/)
+- [Create a free YouTube Data API key](https://jotty-five.vercel.app/guides/youtube-data-api-key/)
+- [Write a task line the judge can use](https://jotty-five.vercel.app/guides/focus-session-setup/)
+- [What Jotty stores](https://jotty-five.vercel.app/guides/what-jotty-stores/)

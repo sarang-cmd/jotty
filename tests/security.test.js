@@ -72,7 +72,7 @@ test("the only external API host in source is the YouTube Data API", () => {
     "youtu.be",
     // The project's own site, used only as a documentation link in the
     // player's empty state. It is never fetched by the extension.
-    "jotty.vercel.app",
+    "jotty-five.vercel.app",
   ]);
   const unexpected = [...hosts].filter((host) => !allowed.has(host) && !host.endsWith("schema.org"));
   assert.deepEqual(unexpected, []);
@@ -88,7 +88,7 @@ test("the only external API host in source is the YouTube Data API", () => {
     const source = read(file);
     for (const request of source.matchAll(/fetch\s*\(\s*[`"'](https:\/\/[^`"']+)/g)) {
       assert.equal(
-        request[1].includes("jotty.vercel.app"),
+        request[1].includes("jotty-five.vercel.app"),
         false,
         `${file} fetches the project site`,
       );

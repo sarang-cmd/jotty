@@ -133,7 +133,7 @@ function renderNeedsKey() {
       ]),
       el("div", { class: "btn-row", style: "margin-top: 16px" }, [
         el("a", { class: "btn btn-primary", href: "options.html#player" }, "Add a key in settings"),
-        el("a", { class: "btn", href: "https://jotty.vercel.app/guides/youtube-data-api-key/", target: "_blank", rel: "noopener" }, "Read the 6-step guide"),
+        el("a", { class: "btn", href: "https://jotty-five.vercel.app/guides/youtube-data-api-key/", target: "_blank", rel: "noopener" }, "Read the 6-step guide"),
       ]),
       el("p", { class: "note", style: "margin-top: 18px" }, [
         "No key? The category list below still works. Each channel opens on YouTube, where the sidebar exists, so it is a fallback rather than the point of the player.",

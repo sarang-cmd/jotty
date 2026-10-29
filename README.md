@@ -6,18 +6,18 @@
 
 **AI study focus coach for Chrome. It judges the page in front of you against the task you set, nudges you back when you drift, and asks about it the next morning.**
 
-[![Website](docs/assets/badges/website.svg)](https://jotty.vercel.app)
+[![Website](docs/assets/badges/website.svg)](https://jotty-five.vercel.app)
 [![Manifest V3](docs/assets/badges/manifest-v3.svg)](#what-runs-where)
 [![Local only](docs/assets/badges/local-first.svg)](#privacy-and-permissions)
 [![No telemetry](docs/assets/badges/telemetry.svg)](#privacy-and-permissions)
 [![Tests](docs/assets/badges/tests.svg)](#development-build-and-test)
 [![License: MIT](docs/assets/badges/license.svg)](LICENSE)
 
-[**Live site and working demos**](https://jotty.vercel.app) · [**Download v1.0.0 (.zip)**](https://jotty.vercel.app/releases/jotty-v1.0.0.zip) · [**60-second install**](#install-unpacked-in-60-seconds) · [**How the judge works**](#how-the-judge-works-deep-dive) · [**Privacy policy**](https://jotty.vercel.app/privacy-policy.html)
+[**Live site and working demos**](https://jotty-five.vercel.app) · [**Download v1.0.0 (.zip)**](https://jotty-five.vercel.app/releases/jotty-v1.0.0.zip) · [**60-second install**](#install-unpacked-in-60-seconds) · [**How the judge works**](#how-the-judge-works-deep-dive) · [**Privacy policy**](https://jotty-five.vercel.app/privacy-policy.html)
 
 <br />
 
-<a href="https://jotty.vercel.app">
+<a href="https://jotty-five.vercel.app">
   <img src="docs/assets/banner-social-1280x640.png" width="100%" alt="Jotty: your attention leaves the page, Jotty notices, and asks about it tomorrow" />
 </a>
 
@@ -113,7 +113,7 @@ Site lists, strict mode, delay length, nudge behaviour, reflection hour, per-sub
 
 ### Option A: download the release (no Node.js)
 
-1. Download **`jotty-v1.0.0.zip`** from [jotty.vercel.app](https://jotty.vercel.app/releases/jotty-v1.0.0.zip) or the GitHub Releases page, and unzip it.
+1. Download **`jotty-v1.0.0.zip`** from [jotty-five.vercel.app](https://jotty-five.vercel.app/releases/jotty-v1.0.0.zip) or the GitHub Releases page, and unzip it.
 2. Open `chrome://extensions` in Chrome, Brave, Arc or Edge and enable **Developer mode**.
 3. Click **Load unpacked** and select the unzipped folder, the one with `manifest.json` at its root.
 
@@ -134,7 +134,7 @@ Then load the **`extension/`** folder via **Load unpacked**. The release ZIP is 
 
 1. Open the popup and type a task that names the assignment, not just the subject.
 2. Start a session. The content script judges pages only while a session is active.
-3. Optional: add a YouTube Data API key in Settings for player search. The [key guide](https://jotty.vercel.app/guides/youtube-data-api-key/) covers the referrer restriction that silently breaks extensions.
+3. Optional: add a YouTube Data API key in Settings for player search. The [key guide](https://jotty-five.vercel.app/guides/youtube-data-api-key/) covers the referrer restriction that silently breaks extensions.
 
 ---
 
@@ -338,7 +338,7 @@ Search results are cached in memory for thirty minutes. Quota use is counted and
 │   ├── check-docs.mjs              # link, asset, a11y and copy checks for docs/
 │   └── render-svg.mjs              # small SVG to PNG helper
 ├── store-assets/                   # Chrome Web Store icon, promo tile and 1280x800 previews
-└── docs/                           # static site -> https://jotty.vercel.app
+└── docs/                           # static site -> https://jotty-five.vercel.app
     ├── index.html                  # landing page with three live demos
     ├── styles.css                  # warm paper design system
     ├── app.js                      # React landing bundle (esbuild)
@@ -376,6 +376,10 @@ npm run previews   # regenerate README and store previews with satori + resvg
 npm run zip        # build, then package extension/ into jotty-v1.0.0.zip
 ```
 
+### Deployment
+
+The Vercel project builds from `main` and serves `docs/` as static files. Its production URL is `https://jotty-five.vercel.app`. Vercel added the `-five` suffix because `jotty.vercel.app` was already claimed by another account, which serves an unrelated create-next-app page. Every canonical link, sitemap entry and in-product link in this repository points at the assigned URL; a custom domain is still unclaimed.
+
 ### What the tests cover
 
 | File | Scope |
@@ -394,17 +398,17 @@ npm run zip        # build, then package extension/ into jotty-v1.0.0.zip
 
 - **Tested:** all 67 Node tests; the build and bundle sizes; every internal link and asset with `npm run check`; the static server and every page response with `curl`; the rendered preview images and mascot at multiple sizes; the demo engine's output against the same functions used in the tests; and a jsdom smoke run that mounts `docs/app.js`, executes the demo controller and checks the rendered sections, demo verdict and seven FAQ triggers with zero console errors.
 - **Not tested in this environment:** a real Chrome install with the extension loaded, because the sandbox has no browser binary. The React landing page is checked by the jsdom smoke run, not by a browser viewport, so Motion timing, Radix focus rings and the exact layout were reviewed through code and the rendered previews. Load the extension unpacked and open the site in Chrome before trusting it for a term.
-- **Not verified:** availability of the name Jotty, a Chrome Web Store listing, or a production domain. The site currently assumes `jotty.vercel.app`.
+- **Not verified:** availability of the name Jotty, a Chrome Web Store listing, or a custom domain. The site is deployed at `jotty-five.vercel.app`; the bare `jotty.vercel.app` name belongs to another account.
 
 ---
 
 ## Guides
 
-- [A morning reflection that changes next week](https://jotty.vercel.app/guides/morning-reflection/)
-- [Study on YouTube without the sidebar](https://jotty.vercel.app/guides/youtube-without-the-feed/)
-- [Create a free YouTube Data API key](https://jotty.vercel.app/guides/youtube-data-api-key/)
-- [Write a task line the judge can use](https://jotty.vercel.app/guides/focus-session-setup/)
-- [What Jotty stores, in plain language](https://jotty.vercel.app/guides/what-jotty-stores/)
+- [A morning reflection that changes next week](https://jotty-five.vercel.app/guides/morning-reflection/)
+- [Study on YouTube without the sidebar](https://jotty-five.vercel.app/guides/youtube-without-the-feed/)
+- [Create a free YouTube Data API key](https://jotty-five.vercel.app/guides/youtube-data-api-key/)
+- [Write a task line the judge can use](https://jotty-five.vercel.app/guides/focus-session-setup/)
+- [What Jotty stores, in plain language](https://jotty-five.vercel.app/guides/what-jotty-stores/)
 
 ---
 
@@ -414,7 +418,7 @@ npm run zip        # build, then package extension/ into jotty-v1.0.0.zip
 - **Local storage only.** `chrome.storage.local` holds sessions, habit slices, flagged events, reflections, settings and feedback.
 - **Two network requests, both user-initiated.** A Focus Player search sends the query and key to `googleapis.com`; pressing play requests the embed from `youtube-nocookie.com`.
 - **The API key is isolated.** It is stored separately, read only by the service worker, and excluded from exports.
-- **Full policy:** [jotty.vercel.app/privacy-policy.html](https://jotty.vercel.app/privacy-policy.html) and [`docs/PRIVACY_POLICY.md`](docs/PRIVACY_POLICY.md). Terms: [`docs/terms.html`](https://jotty.vercel.app/terms.html), currently a draft for review.
+- **Full policy:** [jotty-five.vercel.app/privacy-policy.html](https://jotty-five.vercel.app/privacy-policy.html) and [`docs/PRIVACY_POLICY.md`](docs/PRIVACY_POLICY.md). Terms: [`docs/terms.html`](https://jotty-five.vercel.app/terms.html), currently a draft for review.
 
 ---
 
@@ -430,7 +434,7 @@ npm run zip        # build, then package extension/ into jotty-v1.0.0.zip
 
 ## Font licenses
 
-Public Sans, Instrument Serif and IBM Plex Mono are bundled locally under the SIL Open Font License 1.1. Copyright notices and the full license text are in [`docs/FONT-LICENSES.md`](docs/FONT-LICENSES.md) and [font-licenses.html](https://jotty.vercel.app/font-licenses.html).
+Public Sans, Instrument Serif and IBM Plex Mono are bundled locally under the SIL Open Font License 1.1. Copyright notices and the full license text are in [`docs/FONT-LICENSES.md`](docs/FONT-LICENSES.md) and [font-licenses.html](https://jotty-five.vercel.app/font-licenses.html).
 
 ---
 

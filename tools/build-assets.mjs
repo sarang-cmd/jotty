@@ -70,7 +70,7 @@ function buildIco(sizes) {
 
 /* Badges, drawn in the same warm palette as the site. */
 const badges = {
-  "website.svg": ["website", "jotty.vercel.app"],
+  "website.svg": ["website", "jotty-five.vercel.app"],
   "manifest-v3.svg": ["chrome", "manifest v3"],
   "local-first.svg": ["storage", "on this device"],
   "telemetry.svg": ["telemetry", "none"],

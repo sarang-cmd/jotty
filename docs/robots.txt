@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /releases/
 
-Sitemap: https://jotty.vercel.app/sitemap.xml
+Sitemap: https://jotty-five.vercel.app/sitemap.xml
