@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 540" role="img" aria-labelledby="archTitle archDesc">
+  <title id="archTitle">Jotty architecture</title>
+  <desc id="archDesc">A content script on each page sends the title, address and channel to the service worker, which judges the page against the session and writes the local habit log. Extension pages read the same state. Only a Focus Player search calls the YouTube Data API, from the service worker, with the user's key.</desc>
+  <rect width="1160" height="540" fill="#f4f1ea"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#47624b"/>
+    </marker>
+  </defs>
+  <g font-family="Verdana, DejaVu Sans, sans-serif" fill="#1b221d">
+    <!-- page world -->
+    <rect x="40" y="70" width="290" height="170" rx="6" fill="#fbf9f4" stroke="#d8d1c3"/>
+    <text x="62" y="100" font-size="10" letter-spacing="1.3" fill="#5c675f">EVERY HTTP(S) PAGE</text>
+    <text x="62" y="128" font-size="16" font-weight="bold">content.js</text>
+    <text x="62" y="152" font-size="11.5" fill="#39443c">isolated world, shadow DOM</text>
+    <text x="62" y="174" font-size="11.5" fill="#39443c">reads: title, address, channel</text>
+    <text x="62" y="196" font-size="11.5" fill="#39443c">renders: nudge, delay screen</text>
+    <text x="62" y="220" font-size="10.5" fill="#97593a">no API key, no page body</text>
+
+    <!-- service worker -->
+    <rect x="420" y="50" width="320" height="280" rx="6" fill="#fbf9f4" stroke="#bdb4a2"/>
+    <text x="442" y="80" font-size="10" letter-spacing="1.3" fill="#5c675f">MV3 SERVICE WORKER</text>
+    <text x="442" y="108" font-size="16" font-weight="bold">background.js</text>
+    <rect x="442" y="124" width="276" height="1" fill="#d8d1c3"/>
+    <text x="442" y="150" font-size="12" fill="#39443c">judgePage()</text>
+    <text x="442" y="170" font-size="12" fill="#39443c">softBlockDecision()</text>
+    <text x="442" y="190" font-size="12" fill="#39443c">recordSlice() / recordEvent()</text>
+    <text x="442" y="210" font-size="12" fill="#39443c">buildReflection()</text>
+    <text x="442" y="230" font-size="12" fill="#39443c">searchVideos()</text>
+    <rect x="442" y="248" width="276" height="1" fill="#d8d1c3"/>
+    <text x="442" y="272" font-size="11" fill="#47624b">the only reader of the API key</text>
+    <text x="442" y="292" font-size="11" fill="#5c675f">no network except a player search</text>
+    <text x="442" y="310" font-size="11" fill="#5c675f">pure logic, unit tested in Node</text>
+
+    <!-- storage -->
+    <rect x="830" y="70" width="290" height="170" rx="6" fill="#fbf9f4" stroke="#d8d1c3"/>
+    <text x="852" y="100" font-size="10" letter-spacing="1.3" fill="#5c675f">THIS BROWSER PROFILE</text>
+    <text x="852" y="128" font-size="16" font-weight="bold">chrome.storage.local</text>
+    <text x="852" y="152" font-size="11.5" fill="#39443c">jotty.v1 · session, habits,</text>
+    <text x="852" y="170" font-size="11.5" fill="#39443c">reflections, settings, feedback</text>
+    <text x="852" y="192" font-size="11.5" fill="#39443c">jotty.youtube.key.v1 · key</text>
+    <text x="852" y="216" font-size="10.5" fill="#47624b">exports exclude the key</text>
+
+    <!-- extension pages -->
+    <rect x="40" y="330" width="290" height="170" rx="6" fill="#fbf9f4" stroke="#d8d1c3"/>
+    <text x="62" y="360" font-size="10" letter-spacing="1.3" fill="#5c675f">EXTENSION PAGES</text>
+    <text x="62" y="386" font-size="14.5" font-weight="bold">popup · options</text>
+    <text x="62" y="406" font-size="14.5" font-weight="bold">reflection · focus player</text>
+    <text x="62" y="432" font-size="11.5" fill="#39443c">start and end sessions</text>
+    <text x="62" y="452" font-size="11.5" fill="#39443c">read settings, never the key</text>
+    <text x="62" y="472" font-size="11.5" fill="#39443c">render the plan, play the video</text>
+
+    <!-- youtube api -->
+    <rect x="420" y="404" width="320" height="112" rx="6" fill="#f4f1ea" stroke="#bdb4a2" stroke-dasharray="4 4"/>
+    <text x="442" y="432" font-size="10" letter-spacing="1.3" fill="#5c675f">ONLY WHEN YOU SEARCH</text>
+    <text x="442" y="460" font-size="15" font-weight="bold">YouTube Data API v3</text>
+    <text x="442" y="482" font-size="11.5" fill="#39443c">googleapis.com · your key</text>
+    <text x="442" y="500" font-size="11.5" fill="#39443c">search 100 units · details 1 unit</text>
+
+    <!-- player embed -->
+    <rect x="830" y="404" width="290" height="112" rx="6" fill="#f4f1ea" stroke="#bdb4a2" stroke-dasharray="4 4"/>
+    <text x="852" y="432" font-size="10" letter-spacing="1.3" fill="#5c675f">WHEN YOU PRESS PLAY</text>
+    <text x="852" y="460" font-size="15" font-weight="bold">youtube-nocookie.com</text>
+    <text x="852" y="482" font-size="11.5" fill="#39443c">privacy-enhanced embed</text>
+    <text x="852" y="500" font-size="11.5" fill="#39443c">rel=0 · no next-up queue</text>
+
+    <!-- arrows -->
+    <path d="M330 128 L410 128" stroke="#47624b" stroke-width="1.4" fill="none" marker-end="url(#arrow)"/>
+    <text x="334" y="119" font-size="10" fill="#47624b">page metadata</text>
+    <path d="M410 176 L330 176" stroke="#47624b" stroke-width="1.4" fill="none" marker-end="url(#arrow)"/>
+    <text x="338" y="194" font-size="10" fill="#47624b">verdict</text>
+    <path d="M740 145 L820 145" stroke="#47624b" stroke-width="1.4" fill="none" marker-end="url(#arrow)"/>
+    <text x="748" y="136" font-size="10" fill="#47624b">log · settings</text>
+    <path d="M330 360 L410 320" stroke="#47624b" stroke-width="1.4" fill="none" marker-end="url(#arrow)"/>
+    <text x="330" y="348" font-size="10" fill="#47624b">messages</text>
+    <path d="M500 340 L500 396" stroke="#47624b" stroke-width="1.4" fill="none" marker-end="url(#arrow)"/>
+    <text x="420" y="376" font-size="10" fill="#47624b">query + key</text>
+    <path d="M585 396 L585 340" stroke="#47624b" stroke-width="1.4" fill="none" marker-end="url(#arrow)"/>
+    <text x="594" y="376" font-size="10" fill="#47624b">results</text>
+    <text x="834" y="530" font-size="10" fill="#5c675f">requested by the player page, not by this worker</text>
+  </g>
+</svg>

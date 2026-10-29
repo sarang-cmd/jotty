@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jotty settings</title>
+    <link rel="stylesheet" href="theme.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <a class="brand" href="options.html">
+          <img src="icons/icon48.png" alt="" />
+          <span>
+            <span class="brand-name">Jotty</span>
+            <span class="brand-note">AI study focus coach</span>
+          </span>
+        </a>
+        <nav class="topnav" aria-label="Extension pages">
+          <a href="options.html" aria-current="page">Settings</a>
+          <a href="reflection.html">Morning questions</a>
+          <a href="focus.html">Focus Player</a>
+          <a href="https://jotty.vercel.app" target="_blank" rel="noopener">Website</a>
+        </nav>
+      </header>
+
+      <div class="options-layout">
+        <nav class="options-nav" aria-label="Settings sections" id="options-nav">
+          <a href="#sessions">Focus sessions</a>
+          <a href="#rules">Blocking rules</a>
+          <a href="#nudges">Nudges</a>
+          <a href="#reflection">Morning reflection</a>
+          <a href="#player">Focus Player</a>
+          <a href="#data">Your data</a>
+          <a href="#about">About</a>
+        </nav>
+
+        <main class="options-main">
+          <div class="masthead" style="grid-template-columns: 1fr; margin-bottom: 28px">
+            <div>
+              <h1>Settings</h1>
+              <p class="lede" style="margin-top: 8px">
+                Jotty has no account and no server. Everything on this page is stored in this browser
+                profile and can be exported or deleted below.
+              </p>
+            </div>
+          </div>
+
+          <section id="sessions">
+            <h2>Focus sessions</h2>
+            <p class="section-intro">
+              A session is one task with one clock. The task line is what every page gets judged
+              against, so specific beats tidy.
+            </p>
+            <form id="form-sessions" novalidate>
+              <div class="option-grid">
+                <label class="field" for="default-subject">
+                  <span class="field-label">Default subject</span>
+                  <select class="select" id="default-subject"></select>
+                  <span class="field-hint">Used to prefill new sessions and the Focus Player.</span>
+                </label>
+                <label class="field" for="session-minutes">
+                  <span class="field-label">Session length</span>
+                  <select class="select" id="session-minutes">
+                    <option value="25">25 minutes</option>
+                    <option value="50">50 minutes</option>
+                    <option value="90">90 minutes</option>
+                  </select>
+                </label>
+                <label class="field" for="daily-goal">
+                  <span class="field-label">Daily on-task goal</span>
+                  <input class="input" id="daily-goal" type="number" min="10" max="600" step="5" inputmode="numeric" />
+                  <span class="field-hint">Minutes. The streak in the popup uses this number.</span>
+                </label>
+              </div>
+              <div class="btn-row" style="margin-top: 8px">
+                <button class="btn btn-primary" type="submit">Save focus settings</button>
+                <span class="status-line" data-status="sessions"></span>
+              </div>
+            </form>
+          </section>
+
+          <section id="rules">
+            <h2>Blocking rules</h2>
+            <p class="section-intro">
+              One domain per line. Subdomains are covered. In normal mode Jotty only delays a listed
+              site when the page looks off task; in strict mode every listed site gets the delay.
+            </p>
+            <form id="form-rules" novalidate>
+              <div class="option-grid">
+                <label class="field" for="blocklist">
+                  <span class="field-label">Sites that interrupt a session</span>
+                  <textarea class="textarea" id="blocklist" rows="7" spellcheck="false"></textarea>
+                  <span class="field-hint">Default: YouTube, Instagram, TikTok, X, Reddit and similar.</span>
+                </label>
+                <label class="field" for="allowlist">
+                  <span class="field-label">Sites that are always part of studying</span>
+                  <textarea class="textarea" id="allowlist" rows="7" spellcheck="false"></textarea>
+                  <span class="field-hint">Your LMS, notes, reference pages. These are never judged off task.</span>
+                </label>
+              </div>
+
+              <label class="check" for="block-unrelated">
+                <input type="checkbox" id="block-unrelated" />
+                <span class="check-text">
+                  <strong>Delay clearly unrelated pages, not just listed sites</strong>
+                  <span>Only when the judge is confident. This is what catches a site you have not listed yet.</span>
+                </span>
+              </label>
+              <label class="check" for="strict-mode">
+                <input type="checkbox" id="strict-mode" />
+                <span class="check-text">
+                  <strong>Strict mode</strong>
+                  <span>No override on listed sites during a session. The only exit is ending the session.</span>
+                </span>
+              </label>
+
+              <div class="field-row" style="margin-top: 14px">
+                <label class="field" for="block-delay">
+                  <span class="field-label">Delay before you can continue</span>
+                  <select class="select" id="block-delay">
+                    <option value="5">5 seconds</option>
+                    <option value="8">8 seconds</option>
+                    <option value="12">12 seconds</option>
+                    <option value="20">20 seconds</option>
+                  </select>
+                  <span class="field-hint">Long enough to notice, short enough to keep working.</span>
+                </label>
+              </div>
+
+              <div class="btn-row">
+                <button class="btn btn-primary" type="submit">Save blocking rules</button>
+                <span class="status-line" data-status="rules"></span>
+              </div>
+            </form>
+          </section>
+
+          <section id="nudges">
+            <h2>Nudges</h2>
+            <p class="section-intro">
+              A nudge is the small card in the corner of the page. It names the drift and offers one
+              way back. It does not close the tab for you.
+            </p>
+            <form id="form-nudges" novalidate>
+              <label class="check" for="nudges-enabled">
+                <input type="checkbox" id="nudges-enabled" />
+                <span class="check-text">
+                  <strong>Show the corner nudge on off-task pages</strong>
+                  <span>Includes one line of evidence, "Back to task", snooze and a feedback button.</span>
+                </span>
+              </label>
+              <div class="field-row" style="margin-top: 14px">
+                <label class="field" for="snooze-minutes">
+                  <span class="field-label">Snooze length</span>
+                  <select class="select" id="snooze-minutes">
+                    <option value="5">5 minutes</option>
+                    <option value="10">10 minutes</option>
+                    <option value="20">20 minutes</option>
+                  </select>
+                  <span class="field-hint">The nudge stays quiet for this long, then returns.</span>
+                </label>
+              </div>
+              <div class="btn-row">
+                <button class="btn btn-primary" type="submit">Save nudge settings</button>
+                <span class="status-line" data-status="nudges"></span>
+              </div>
+            </form>
+          </section>
+
+          <section id="reflection">
+            <h2>Morning reflection</h2>
+            <p class="section-intro">
+              The next morning Jotty asks about the pages that did not belong to the task. Questions
+              come from your own log, never from a template about "productivity".
+            </p>
+            <form id="form-reflection" novalidate>
+              <label class="check" for="reflection-enabled">
+                <input type="checkbox" id="reflection-enabled" />
+                <span class="check-text">
+                  <strong>Prepare questions after a session with drift</strong>
+                  <span>They wait in the popup until you answer them.</span>
+                </span>
+              </label>
+              <label class="check" for="notifications-enabled">
+                <input type="checkbox" id="notifications-enabled" />
+                <span class="check-text">
+                  <strong>A single notification in the morning</strong>
+                  <span>One per day at most. Nothing is sent anywhere; it is a browser notification.</span>
+                </span>
+              </label>
+              <div class="field-row" style="margin-top: 14px">
+                <label class="field" for="reflection-hour">
+                  <span class="field-label">Ask me at</span>
+                  <select class="select" id="reflection-hour"></select>
+                  <span class="field-hint">Local time. The reflection stays open all day.</span>
+                </label>
+              </div>
+              <div class="btn-row">
+                <button class="btn btn-primary" type="submit">Save reflection settings</button>
+                <span class="status-line" data-status="reflection"></span>
+              </div>
+            </form>
+          </section>
+
+          <section id="player">
+            <h2>Focus Player</h2>
+            <p class="section-intro">
+              Jotty searches YouTube through its own interface and plays the result in the
+              privacy-enhanced embed, without the sidebar or the next-up queue. Search uses the
+              official YouTube Data API with your own key. The key stays in this profile.
+            </p>
+            <form id="form-player" novalidate>
+              <div class="field-row">
+                <label class="field" for="channels-subject">
+                  <span class="field-label">Subject</span>
+                  <select class="select" id="channels-subject"></select>
+                  <span class="field-hint">Channels are trusted per subject.</span>
+                </label>
+                <label class="field" for="channels-list">
+                  <span class="field-label">Trusted channels</span>
+                  <textarea class="textarea" id="channels-list" rows="4" spellcheck="false" placeholder="@khanacademy"></textarea>
+                  <span class="field-hint">One handle per line. Results from these channels are listed first.</span>
+                </label>
+              </div>
+              <div class="btn-row">
+                <button class="btn btn-primary" type="submit">Save channels</button>
+                <button class="btn" type="button" id="channels-reset">Reset to suggested channels</button>
+                <span class="status-line" data-status="player"></span>
+              </div>
+            </form>
+
+            <form id="form-key" style="margin-top: 26px; border-top: 1px solid var(--line); padding-top: 22px" novalidate>
+              <h3 style="font-family: var(--sans); font-size: 14px; font-weight: 600; margin-bottom: 6px">
+                YouTube Data API key
+              </h3>
+              <p class="small muted" style="max-width: 62ch; margin-bottom: 14px">
+                Free quota is 10,000 units per day. One search costs about 101 units, so roughly 99
+                searches. Without a key the player still works with your channel list, but search is
+                off.
+              </p>
+              <div class="field-row">
+                <label class="field" for="api-key">
+                  <span class="field-label">API key</span>
+                  <input class="input" id="api-key" type="password" autocomplete="off" spellcheck="false" placeholder="AIza..." />
+                  <span class="field-hint" id="key-hint">Stored in chrome.storage.local. Never sent to Jotty.</span>
+                </label>
+                <label class="field" for="quota-readout">
+                  <span class="field-label">Quota used today</span>
+                  <input class="input" id="quota-readout" type="text" readonly />
+                  <span class="field-hint">Counted by Jotty from its own requests.</span>
+                </label>
+              </div>
+              <div class="btn-row">
+                <button class="btn btn-primary" type="button" id="key-save">Save key</button>
+                <button class="btn" type="button" id="key-test">Test key</button>
+                <button class="btn btn-danger" type="button" id="key-clear">Remove key</button>
+                <span class="status-line" data-status="key"></span>
+              </div>
+            </form>
+          </section>
+
+          <section id="data">
+            <h2>Your data</h2>
+            <p class="section-intro">
+              The log holds domains, page titles, verdicts and minutes. It does not hold page
+              content, keystrokes, form values or screenshots. Export is a readable JSON file.
+            </p>
+            <div class="btn-row">
+              <button class="btn" type="button" id="export-data">Export a JSON copy</button>
+              <button class="btn" type="button" id="clear-data">Delete stored data</button>
+            </div>
+            <div id="clear-panel" class="panel hidden" style="margin-top: 16px; border-color: #d9bda9">
+              <h3 style="font-family: var(--sans); font-size: 14px; font-weight: 600">Delete everything?</h3>
+              <p class="small muted" style="margin: 6px 0 12px">
+                This removes the habit log, reflections, settings and the YouTube key from this
+                browser. It cannot be undone. Type DELETE to confirm.
+              </p>
+              <div class="btn-row">
+                <input class="input" id="clear-confirm" type="text" aria-label="Type DELETE to confirm" placeholder="DELETE" style="max-width: 160px" />
+                <button class="btn btn-danger" type="button" id="clear-confirm-button" disabled>Delete data</button>
+                <button class="btn btn-ghost" type="button" id="clear-cancel">Cancel</button>
+              </div>
+              <span class="status-line" data-status="data"></span>
+            </div>
+          </section>
+
+          <section id="about">
+            <h2>About</h2>
+            <p class="section-intro">
+              Jotty is an independent open-source project. It is not affiliated with YouTube, Google,
+              or any school. Version <span class="mono" id="version-label">1.0.0</span>, MIT licensed.
+            </p>
+            <ul class="quiet-list">
+              <li><span>Website and privacy policy</span><a href="https://jotty.vercel.app/privacy-policy.html" target="_blank" rel="noopener">jotty.vercel.app</a></li>
+              <li><span>Source code</span><a href="https://github.com/sarang-cmd/jotty" target="_blank" rel="noopener">github.com/sarang-cmd/jotty</a></li>
+              <li><span>Permissions explained</span><a href="https://jotty.vercel.app/privacy-policy.html#permissions" target="_blank" rel="noopener">Read the policy</a></li>
+            </ul>
+            <p class="note" style="margin-top: 20px">
+              Content scripts run on every http and https page so a session can judge the page you
+              are on. They read the title, the address and the channel name, and nothing else. When
+              no session is running, Jotty judges nothing and records nothing.
+            </p>
+          </section>
+        </main>
+      </div>
+    </div>
+    <script src="options.js"></script>
+  </body>
+</html>

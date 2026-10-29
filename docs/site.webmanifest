@@ -1,0 +1,16 @@
+{
+  "name": "Jotty: AI study focus coach",
+  "short_name": "Jotty",
+  "description": "A local-first study coach for the browser. Judges pages against your task, nudges you back, and asks about yesterday.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#f4f1ea",
+  "theme_color": "#f4f1ea",
+  "icons": [
+    { "src": "/assets/icon-48.png", "sizes": "48x48", "type": "image/png" },
+    { "src": "/assets/icon-128.png", "sizes": "128x128", "type": "image/png" },
+    { "src": "/favicon-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/favicon-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build leftovers
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+coverage/
+
+# Local environment
+.env
+.env.*
+!.env.example
+
+# Scratch renders from tools/render-svg.mjs
+docs/assets/_preview-*.png
+
+# Vercel
+.vercel/

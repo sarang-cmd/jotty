@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Jotty stores, in plain language · Jotty</title>
+    <meta name="description" content="The storage object field by field, the two network requests, how to inspect it yourself, and how to delete all of it." />
+    <link rel="canonical" href="https://jotty.vercel.app/guides/what-jotty-stores/" />
+    <meta name="theme-color" content="#f4f1ea" />
+    <meta property="og:title" content="What Jotty stores, in plain language · Jotty" />
+    <meta property="og:description" content="The storage object field by field, the two network requests, how to inspect it yourself, and how to delete all of it." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://jotty.vercel.app/guides/what-jotty-stores/" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <a class="brand" href="/" aria-label="Jotty home">
+          <img src="../../assets/icon-48.png" width="30" height="30" alt="" />
+          <span class="brand-text"><span class="brand-name">Jotty</span></span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="/#judge">The judge</a>
+          <a href="../../guides/" aria-current="page">Guides</a>
+          <a href="../../privacy-policy.html">Privacy</a>
+          <a href="../../terms.html">Terms</a>
+        </nav>
+        <div class="nav-actions"><a class="btn btn-primary btn-sm" href="/#install">Install</a></div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="subpage-head">
+        <a class="back-link" href="../../guides/">All guides</a>
+      </div>
+      <article class="article">
+        <h1>What Jotty stores, in plain language</h1>
+        <p class="article-meta"><span>6 minute read · Updated 29 October 2026</span><span>Jotty field guide</span></p>
+        <p class="article-lede">There is no Jotty server. The entire product state is one JSON object in chrome.storage.local, plus a separate key for YouTube. Here is exactly what is in it.</p>
+
+        <h2>The shape</h2>
+        <p>
+          Everything except the API key and the quota counter lives under one storage key,
+          <code>jotty.v1</code>:
+        </p>
+        <pre><code>{
+  "version": 1,
+  "settings": { ... },
+  "session": {
+    "task": "Gas stoichiometry, chapter 9",
+    "subject": "Chemistry",
+    "deadline": "2026-10-28",
+    "startedAt": "2026-10-27T15:58:00.000Z",
+    "endsAt": "2026-10-27T16:48:00.000Z",
+    "status": "active",
+    "taskUrl": "https://docs.google.com/document/d/ch9"
+  },
+  "habits": {
+    "days": {
+      "2026-10-27": {
+        "hours": [{ "onTask": 0, "offTask": 0 }],
+        "domains": {
+          "youtube.com": { "seconds": 420, "onTask": 0, "offTask": 420 }
+        },
+        "flagged": 2
+      }
+    },
+    "events": [
+      {
+        "ts": 1793117040000,
+        "domain": "youtube.com",
+        "title": "The chemistry of Teflon and nonstick pans",
+        "verdict": "adjacent",
+        "action": "nudged"
+      }
+    ]
+  },
+  "reflections": { ... },
+  "feedback": [ ... ],
+  "meta": { "installedAt": "..." }
+}</code></pre>
+        <p>
+          The example is shortened. A full day has 24 hour buckets, and the event list is capped at
+          400 entries.
+        </p>
+
+        <h2>What is deliberately absent</h2>
+        <p>
+          No page text, no transcripts, no comments, no form values, no keystrokes, no screenshots and
+          no account identifier. The judge only receives the title, address, channel and description
+          meta tag for the moment it makes a call. The description is truncated to 600 characters and
+          is not stored with the event.
+        </p>
+
+        <h2>The API key is separate</h2>
+        <p>
+          The YouTube key lives under <code>jotty.youtube.key.v1</code>. It is read only by the
+          extension's service worker. The guard is enforced in code: calling the reader from a popup,
+          options page or content script throws. Exporting data does not include it.
+        </p>
+
+        <h2>Retention</h2>
+        <ul>
+          <li>Days and events older than ninety days are pruned when new time is recorded.</li>
+          <li>Reflections are kept until deletion, because they are the history of your own decisions.</li>
+          <li>Search results are cached in memory for thirty minutes and are not written to storage.</li>
+          <li>Uninstalling removes the extension's storage, subject to browser cleanup.</li>
+        </ul>
+
+        <h2>The only two network requests</h2>
+        <ol>
+          <li>A Focus Player search sends the query and key to <code>www.googleapis.com</code>.</li>
+          <li>Pressing play loads the video from <code>www.youtube-nocookie.com</code>.</li>
+        </ol>
+        <p>
+          Both are started by you. Everything else runs in the browser. There is no analytics script,
+          no crash reporter and no sync.
+        </p>
+
+        <h2>Inspect it yourself</h2>
+        <ol>
+          <li>Open <code>chrome://extensions</code> and find Jotty.</li>
+          <li>Press <strong>service worker</strong> to open the worker console.</li>
+          <li>Run <code>chrome.storage.local.get(console.log)</code>.</li>
+        </ol>
+        <p>
+          That prints the exact object described above. If a future version stores something new, this
+          guide and the privacy policy are updated in the same commit.
+        </p>
+
+        <h2>Delete it</h2>
+        <p>
+          Settings → Your data → Delete stored data. Type DELETE to confirm. That removes the state,
+          the key and the quota counter. There is no server-side copy to request, because there is no
+          server.
+        </p>
+
+        <div class="next-actions">
+          <a class="btn btn-primary" href="/#install">Install Jotty</a>
+          <a class="btn" href="../../guides/">More guides</a>
+          <a class="btn" href="../../privacy-policy.html">Privacy policy</a>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>Jotty is an independent project. Not affiliated with YouTube, Google, or any school.</p>
+          <p>© <span id="year">2026</span> Jotty · MIT · <a href="../../privacy-policy.html">Privacy</a> · <a href="../../terms.html">Terms</a></p>
+        </div>
+      </div>
+    </footer>
+    <script src="../../site-static.js"></script>
+  </body>
+</html>

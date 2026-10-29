@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /releases/
+
+Sitemap: https://jotty.vercel.app/sitemap.xml

@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy policy · Jotty</title>
+    <meta name="description" content="What Jotty stores locally, what it never collects, and the only two times it makes a network request. Effective 29 October 2026." />
+    <link rel="canonical" href="https://jotty.vercel.app/privacy-policy.html" />
+    <meta name="theme-color" content="#f4f1ea" />
+    <meta property="og:title" content="Privacy policy · Jotty" />
+    <meta property="og:description" content="No backend, no account, no analytics. The exact data practices of the Jotty Chrome extension." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://jotty.vercel.app/privacy-policy.html" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <a class="brand" href="/" aria-label="Jotty home">
+          <img src="assets/icon-48.png" width="30" height="30" alt="" />
+          <span class="brand-text"><span class="brand-name">Jotty</span></span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="index.html#judge">The judge</a>
+          <a href="guides/">Guides</a>
+          <a href="privacy-policy.html" aria-current="page">Privacy</a>
+          <a href="terms.html">Terms</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="btn btn-primary btn-sm" href="index.html#install">Install</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="subpage-head">
+        <a class="back-link" href="/">Jotty home</a>
+      </div>
+      <article class="article">
+        <h1>Privacy policy</h1>
+        <p class="article-meta">
+          <span>Effective 29 October 2026</span>
+          <span>Version 1.0</span>
+          <span>Applies to the Jotty extension and this website</span>
+        </p>
+
+        <p class="article-lede">
+          Jotty has no backend. There is no account, no analytics, no crash reporting and no
+          developer server that could receive your data. This page describes, field by field, what
+          the extension stores, what it sends, and how to remove it.
+        </p>
+
+        <div class="draft-note">
+          Draft for review: this policy is written to match the shipped code, but it has not been
+          reviewed by a lawyer. Before a public store release, the operator should confirm the
+          contact route, retention wording and the governing-law section in the Terms of Service.
+        </div>
+
+        <h2>Who runs Jotty</h2>
+        <p>
+          Jotty is an independent open-source project published by the developer of the
+          <a href="https://github.com/sarang-cmd/jotty">sarang-cmd/jotty repository</a>. There is no
+          company, no team and no support inbox behind it. Questions and data requests happen through
+          <a href="https://github.com/sarang-cmd/jotty/issues">GitHub issues</a>, which are public by
+          nature; do not post personal data there.
+        </p>
+
+        <h2>What the extension stores</h2>
+        <p>
+          Everything below is stored with <code>chrome.storage.local</code> inside your browser
+          profile. It does not sync to your Google account, and it is not readable by other
+          extensions.
+        </p>
+        <table>
+          <thead>
+            <tr><th scope="col">Field</th><th scope="col">What it contains</th><th scope="col">Why</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Session</td>
+              <td>Task line, subject, optional deadline, start and end time, optional task address.</td>
+              <td>The judge needs a task. The nudge needs a way back.</td>
+            </tr>
+            <tr>
+              <td>Habit slices</td>
+              <td>Date, hour, domain, seconds, and whether the time was on task.</td>
+              <td>The heatmap and weak spot ranking.</td>
+            </tr>
+            <tr>
+              <td>Events</td>
+              <td>Domain, URL, page title, channel name (YouTube only), verdict, action taken.</td>
+              <td>The next morning's questions.</td>
+            </tr>
+            <tr>
+              <td>Reflections</td>
+              <td>Your selected answers, optional free text, the generated plan.</td>
+              <td>So the conversation does not restart every time you open the page.</td>
+            </tr>
+            <tr>
+              <td>Settings</td>
+              <td>Site lists, trusted channels, session length, reminder hour, strict mode.</td>
+              <td>Your configuration.</td>
+            </tr>
+            <tr>
+              <td>Feedback</td>
+              <td>The domain, verdict and task attached to a "This helps" click.</td>
+              <td>So a misjudgement can be reviewed locally.</td>
+            </tr>
+            <tr>
+              <td>API key</td>
+              <td>Your YouTube Data API key, in a separate storage key.</td>
+              <td>Focus Player search. Excluded from exports.</td>
+            </tr>
+            <tr>
+              <td>Quota counter</td>
+              <td>A date and a unit count.</td>
+              <td>To show what today's searches cost.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>What Jotty never collects</h2>
+        <ul>
+          <li>Page content, article text, video transcripts, comments or feeds.</li>
+          <li>Keystrokes, clipboard contents, form values, passwords or payment details.</li>
+          <li>Screenshots, camera, microphone or location.</li>
+          <li>Your name, email address, school or Google account identity.</li>
+          <li>Analytics identifiers, advertising identifiers, or a Jotty user id.</li>
+        </ul>
+        <p>
+          The content script reads exactly three fields from a page: <code>document.title</code>,
+          <code>location.href</code>, and on YouTube the channel name. It also reads the page's
+          description meta tag as a fallback signal. It does not walk the page body.
+        </p>
+
+        <h2 id="permissions">Permissions, and why each exists</h2>
+        <table>
+          <thead>
+            <tr><th scope="col">Permission</th><th scope="col">Reason</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>storage</code></td>
+              <td>Holds the session, log, reflection and settings. Required for every feature.</td>
+            </tr>
+            <tr>
+              <td><code>alarms</code></td>
+              <td>Session-end and morning-reflection reminders. No background polling.</td>
+            </tr>
+            <tr>
+              <td><code>notifications</code></td>
+              <td>One optional browser notification in the morning and one when a session ends.</td>
+            </tr>
+            <tr>
+              <td><code>https://www.googleapis.com/*</code></td>
+              <td>The YouTube Data API, used only when you start a Focus Player search.</td>
+            </tr>
+            <tr>
+              <td>Content script on http and https pages</td>
+              <td>Needed to judge the page you are on during a session. With no session running, nothing is judged or logged.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>When data leaves your browser</h2>
+        <p>There are exactly two cases, and both are started by you.</p>
+        <ol>
+          <li>
+            <strong>Focus Player search.</strong> Your search text and API key are sent to
+            <code>www.googleapis.com</code> because that is the YouTube Data API. Google receives the
+            query, your key and the usual request metadata such as your IP address. The key is read
+            only inside the extension's service worker and is never included in an export.
+          </li>
+          <li>
+            <strong>Video playback.</strong> When you press play, your browser requests the embed from
+            <code>www.youtube-nocookie.com</code>, which is Google's privacy-enhanced YouTube embed.
+            Google may set cookies or receive request data under its own policies. Jotty does not send
+            your task, log or reflections with that request.
+          </li>
+        </ol>
+        <p>
+          This website is static and self-hosted on Vercel. It loads no analytics, no third-party
+          scripts, no remote fonts and no embed. The host may keep standard access logs under its own
+          policy. Fonts are served from this domain.
+        </p>
+
+        <h2>YouTube API Services</h2>
+        <p>
+          The Focus Player uses YouTube API Services. By using that feature you also agree to the
+          <a href="https://www.youtube.com/t/terms" rel="noopener" target="_blank">YouTube Terms of Service</a>
+          and acknowledge the
+          <a href="https://policies.google.com/privacy" rel="noopener" target="_blank">Google Privacy Policy</a>.
+          Jotty does not store YouTube account data, watch history or video metadata beyond what is
+          rendered in the player page at that moment. Search results are cached in memory for thirty
+          minutes inside the service worker and disappear when the browser closes.
+        </p>
+
+        <h2>Retention</h2>
+        <ul>
+          <li>Habit days and events older than ninety days are pruned automatically.</li>
+          <li>Reflections are kept until you delete them or clear all data.</li>
+          <li>The API key stays until you remove it in Settings.</li>
+          <li>Uninstalling the extension removes its local storage, subject to your browser's own cleanup.</li>
+        </ul>
+
+        <h2>Export and deletion</h2>
+        <p>
+          Settings → Your data exports a readable JSON file of the session, log, events, reflections
+          and settings. The same page deletes everything after you type DELETE. Both actions happen
+          in your browser; neither contacts a server.
+        </p>
+
+        <h2>Security, stated plainly</h2>
+        <p>
+          Local storage is protected by your operating system profile, not by Jotty's own encryption.
+          Anyone with access to your open browser profile can read it. The API key is isolated in
+          the service worker so page scripts never receive it, and the extension refuses to return it
+          outside that context. If you are worried about a shared computer, remove the key after use.
+        </p>
+
+        <h2>Children</h2>
+        <p>
+          Jotty is a study tool for secondary school and university students. It has no account, no
+          social features and no way to contact another person. It does not knowingly collect
+          personal information from anyone, because it does not collect personal information at all.
+        </p>
+
+        <h2>Changes</h2>
+        <p>
+          Material changes will appear in this page and in the repository history before a release.
+          The effective date at the top always matches the shipped version. The Markdown source is at
+          <a href="PRIVACY_POLICY.md">PRIVACY_POLICY.md</a>.
+        </p>
+
+        <div class="next-actions">
+          <a class="btn btn-primary" href="index.html#install">Install Jotty</a>
+          <a class="btn" href="terms.html">Read the terms</a>
+          <a class="btn" href="guides/what-jotty-stores/">The storage guide</a>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>Jotty is an independent project. Not affiliated with YouTube, Google, or any school.</p>
+          <p>© <span id="year">2026</span> Jotty · MIT · <a href="privacy-policy.html">Privacy</a> · <a href="terms.html">Terms</a></p>
+        </div>
+      </div>
+    </footer>
+    <script src="site-static.js"></script>
+  </body>
+</html>

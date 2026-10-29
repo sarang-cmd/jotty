@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://jotty.vercel.app/</loc><lastmod>2026-10-29</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://jotty.vercel.app/guides/</loc><lastmod>2026-10-29</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://jotty.vercel.app/guides/morning-reflection/</loc><lastmod>2026-10-29</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://jotty.vercel.app/guides/youtube-without-the-feed/</loc><lastmod>2026-10-29</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://jotty.vercel.app/guides/youtube-data-api-key/</loc><lastmod>2026-10-29</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://jotty.vercel.app/guides/focus-session-setup/</loc><lastmod>2026-10-29</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://jotty.vercel.app/guides/what-jotty-stores/</loc><lastmod>2026-10-29</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://jotty.vercel.app/privacy-policy.html</loc><lastmod>2026-10-29</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://jotty.vercel.app/terms.html</loc><lastmod>2026-10-29</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://jotty.vercel.app/font-licenses.html</loc><lastmod>2026-10-29</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
+</urlset>

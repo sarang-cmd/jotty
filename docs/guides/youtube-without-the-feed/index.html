@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Study on YouTube without the sidebar · Jotty</title>
+    <meta name="description" content="Why the related-video queue wins, what Jotty's player changes, and the settings that remove the hallway without blocking the help." />
+    <link rel="canonical" href="https://jotty.vercel.app/guides/youtube-without-the-feed/" />
+    <meta name="theme-color" content="#f4f1ea" />
+    <meta property="og:title" content="Study on YouTube without the sidebar · Jotty" />
+    <meta property="og:description" content="Why the related-video queue wins, what Jotty's player changes, and the settings that remove the hallway without blocking the help." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://jotty.vercel.app/guides/youtube-without-the-feed/" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <a class="brand" href="/" aria-label="Jotty home">
+          <img src="../../assets/icon-48.png" width="30" height="30" alt="" />
+          <span class="brand-text"><span class="brand-name">Jotty</span></span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="/#judge">The judge</a>
+          <a href="../../guides/" aria-current="page">Guides</a>
+          <a href="../../privacy-policy.html">Privacy</a>
+          <a href="../../terms.html">Terms</a>
+        </nav>
+        <div class="nav-actions"><a class="btn btn-primary btn-sm" href="/#install">Install</a></div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="subpage-head">
+        <a class="back-link" href="../../guides/">All guides</a>
+      </div>
+      <article class="article">
+        <h1>Study on YouTube without the sidebar</h1>
+        <p class="article-meta"><span>6 minute read · Updated 29 October 2026</span><span>Jotty field guide</span></p>
+        <p class="article-lede">YouTube is where the explanation lives and also where the study session ends. You do not have to choose between the two; you have to remove the part that is designed to keep you.</p>
+
+        <h2>The sidebar is the product</h2>
+        <p>
+          A video page is not just a video. It is a video plus a column of next steps, each one ranked
+          to be slightly more interesting than what you searched for. When you opened the page, you had
+          a question. By the time the video ends, the question is gone and the column is in charge.
+        </p>
+        <p>
+          That is why "just be disciplined" fails. The recommendation is not a temptation you chose to
+          accept; it is the default surface of the site. Removing it is a design decision, not a
+          character trait.
+        </p>
+
+        <h2>What the Focus Player changes</h2>
+        <ul>
+          <li><strong>Search happens in Jotty.</strong> You type the task, not a vague curiosity. Results show title, channel, duration and views.</li>
+          <li><strong>Your channels come first.</strong> A per-subject allowlist moves channels you already trust to the top.</li>
+          <li><strong>Short clips are hidden.</strong> Anything under ninety seconds is not a lesson, and it is not shown.</li>
+          <li><strong>Playback is embedded.</strong> The video plays from youtube-nocookie.com with related videos limited to the same channel and annotation cards off.</li>
+          <li><strong>There is no queue.</strong> When the video ends, the player suggests nothing. Closing the tab is the next action.</li>
+        </ul>
+
+        <h2>What it does not do</h2>
+        <p>
+          It does not block YouTube. You can still open youtube.com, and during a session Jotty will
+          judge the page and nudge you if it is off task. If you want friction, add YouTube to the site
+          list in Settings and turn on the delay. Strict mode removes the override for the length of a
+          session.
+        </p>
+        <p>
+          It also does not download videos, strip ads, or bypass YouTube's player. The embed is the
+          official one. Ads may still appear depending on your account and region. Jotty shows no ads
+          of its own.
+        </p>
+
+        <h2>The honest limits of an embed</h2>
+        <p>
+          YouTube controls the player. Parameters such as <code>rel=0</code> reduce related videos but
+          do not remove every surface, and they can change. Treat the clean player as a strong default,
+          not a guarantee. The stronger guarantee is structural: Jotty never shows you a results page
+          built to keep you scrolling.
+        </p>
+
+        <h2>Setting it up</h2>
+        <ol>
+          <li>Open Settings → Focus Player and add a YouTube Data API key. The <a href="../youtube-data-api-key/">key guide</a> takes six steps.</li>
+          <li>Edit the trusted channel list for your subject. The defaults are real channels; remove the ones you do not use.</li>
+          <li>Start a focus session with a task, then open the player from the popup.</li>
+          <li>Search the task. If a result is good but the channel is new, press "Trust this channel" once.</li>
+        </ol>
+        <div class="callout">
+          Each search costs about 101 of the 10,000 free daily units. Jotty shows the running total in
+          Settings, so you can see the cost instead of guessing.
+        </div>
+
+        <h2>If you do not want an API key</h2>
+        <p>
+          The rest of Jotty works without one. The player will show your channel list and explain that
+          search is off. That is a deliberate trade: no key, no scraping, no pretending.
+        </p>
+
+        <div class="next-actions">
+          <a class="btn btn-primary" href="/#install">Install Jotty</a>
+          <a class="btn" href="../../guides/">More guides</a>
+          <a class="btn" href="../../privacy-policy.html">Privacy policy</a>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>Jotty is an independent project. Not affiliated with YouTube, Google, or any school.</p>
+          <p>© <span id="year">2026</span> Jotty · MIT · <a href="../../privacy-policy.html">Privacy</a> · <a href="../../terms.html">Terms</a></p>
+        </div>
+      </div>
+    </footer>
+    <script src="../../site-static.js"></script>
+  </body>
+</html>
