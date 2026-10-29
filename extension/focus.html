@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Focus Player · Jotty</title>
+    <link rel="stylesheet" href="theme.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <a class="brand" href="options.html">
+          <img src="icons/icon48.png" alt="" />
+          <span>
+            <span class="brand-name">Jotty</span>
+            <span class="brand-note">AI study focus coach</span>
+          </span>
+        </a>
+        <nav class="topnav" aria-label="Extension pages">
+          <a href="options.html">Settings</a>
+          <a href="reflection.html">Morning questions</a>
+          <a href="focus.html" aria-current="page">Focus Player</a>
+        </nav>
+      </header>
+
+      <main>
+        <div class="masthead">
+          <div>
+            <h1>Search the subject, not the feed.</h1>
+            <p class="lede">
+              YouTube search is the doorway where most study sessions turn into something else. Jotty
+              searches for you and plays the result without a sidebar, a next-up queue or a comment
+              section.
+            </p>
+          </div>
+          <aside class="masthead-aside" id="session-aside">
+            <strong>Current session</strong>
+            <span id="session-task">No session is running.</span>
+          </aside>
+        </div>
+
+        <section class="panel" aria-labelledby="search-heading">
+          <div class="panel-head">
+            <h2 id="search-heading">Find a video for this task</h2>
+            <span class="chip" id="mode-chip">Your own API key</span>
+          </div>
+          <form id="search-form" class="search-row" novalidate>
+            <label class="sr-only" for="query">Search query</label>
+            <input class="input" id="query" type="search" placeholder="e.g. gas stoichiometry practice problems" autocomplete="off" />
+            <label class="sr-only" for="player-subject">Subject</label>
+            <select class="select" id="player-subject" style="max-width: 200px"></select>
+            <button class="btn btn-primary" type="submit" id="search-button">Search</button>
+          </form>
+          <div class="btn-row" id="suggestions" style="margin-top: 12px"></div>
+          <p class="small muted" style="margin-top: 14px" id="quota-note">
+            Search costs about 101 YouTube quota units per request. Your key, your quota.
+          </p>
+        </section>
+
+        <section style="margin-top: 26px" aria-live="polite" id="results-region">
+          <div id="player-view" class="hidden"></div>
+          <div id="results"></div>
+        </section>
+      </main>
+    </div>
+    <script src="focus.js"></script>
+  </body>
+</html>

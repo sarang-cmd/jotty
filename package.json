@@ -1,0 +1,45 @@
+{
+  "name": "jotty",
+  "version": "1.0.0",
+  "description": "AI study focus coach for Chrome. Judges the page against your task, nudges you back, and asks about it tomorrow.",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "node --test tests/*.test.js",
+    "zip": "node build.mjs && cd extension && rm -f ../docs/releases/jotty-v1.0.0.zip && zip -r ../docs/releases/jotty-v1.0.0.zip . -x \"*.DS_Store\"",
+    "site": "node serve-docs.mjs",
+    "assets": "node tools/build-assets.mjs",
+    "check": "node tools/check-docs.mjs",
+    "previews": "node tools/build-previews.mjs",
+    "verify": "node build.mjs && node --test tests/*.test.js && node tools/check-docs.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarang-cmd/jotty.git"
+  },
+  "keywords": [
+    "chrome-extension",
+    "study",
+    "focus",
+    "mv3",
+    "local-first",
+    "youtube"
+  ],
+  "author": "sarang-cmd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sarang-cmd/jotty/issues"
+  },
+  "homepage": "https://jotty.vercel.app",
+  "devDependencies": {
+    "@fontsource/ibm-plex-mono": "^5.2.6",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@fontsource/public-sans": "^5.3.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "esbuild": "^0.25.0",
+    "parse5": "^7.2.1",
+    "satori": "^0.12.0"
+  },
+  "private": true,
+  "type": "module"
+}

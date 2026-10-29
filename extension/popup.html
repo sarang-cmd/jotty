@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jotty</title>
+    <link rel="stylesheet" href="theme.css" />
+  </head>
+  <body class="popup">
+    <div class="popup-wrap">
+      <header class="popup-head">
+        <div class="popup-brand">
+          <img src="icons/icon48.png" width="26" height="26" alt="" />
+          <span>Jotty</span>
+        </div>
+        <span class="popup-state" id="state-pill" data-state="idle"><i></i><span>No session</span></span>
+      </header>
+
+      <main id="view" aria-live="polite">
+        <div style="padding: 24px 0">
+          <div class="skeleton" style="width: 62%; height: 18px; margin-bottom: 12px"></div>
+          <div class="skeleton" style="width: 100%; height: 38px; margin-bottom: 8px"></div>
+          <div class="skeleton" style="width: 40%; height: 14px"></div>
+        </div>
+      </main>
+
+      <footer class="popup-foot">
+        <a href="options.html" id="settings-link">Settings</a>
+        <span id="privacy-note">Stays on this device</span>
+      </footer>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>

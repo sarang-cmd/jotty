@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create a free YouTube Data API key · Jotty</title>
+    <meta name="description" content="Six steps in Google Cloud, the restriction that quietly breaks browser extensions, and how to test the key inside Jotty." />
+    <link rel="canonical" href="https://jotty.vercel.app/guides/youtube-data-api-key/" />
+    <meta name="theme-color" content="#f4f1ea" />
+    <meta property="og:title" content="Create a free YouTube Data API key · Jotty" />
+    <meta property="og:description" content="Six steps in Google Cloud, the restriction that quietly breaks browser extensions, and how to test the key inside Jotty." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://jotty.vercel.app/guides/youtube-data-api-key/" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="stylesheet" href="../../styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav">
+        <a class="brand" href="/" aria-label="Jotty home">
+          <img src="../../assets/icon-48.png" width="30" height="30" alt="" />
+          <span class="brand-text"><span class="brand-name">Jotty</span></span>
+        </a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="/#judge">The judge</a>
+          <a href="../../guides/" aria-current="page">Guides</a>
+          <a href="../../privacy-policy.html">Privacy</a>
+          <a href="../../terms.html">Terms</a>
+        </nav>
+        <div class="nav-actions"><a class="btn btn-primary btn-sm" href="/#install">Install</a></div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="subpage-head">
+        <a class="back-link" href="../../guides/">All guides</a>
+      </div>
+      <article class="article">
+        <h1>Create a free YouTube Data API key</h1>
+        <p class="article-meta"><span>9 minute read · Updated 29 October 2026</span><span>Jotty field guide</span></p>
+        <p class="article-lede">Focus Player search uses the official YouTube Data API v3. You need a Google Cloud project, one enabled API and one key. The free daily quota is 10,000 units, and no billing account is required.</p>
+
+        <h2>Before you start</h2>
+        <p>
+          You need a Google account. You do not need a credit card for the free quota used here, and
+          you do not need to publish anything. The key is a string that identifies your project, not
+          your Google account password.
+        </p>
+
+        <h2>1. Create a project</h2>
+        <ol>
+          <li>Open <a href="https://console.cloud.google.com/" rel="noopener" target="_blank">console.cloud.google.com</a>.</li>
+          <li>Use the project selector at the top of the page and choose <strong>New project</strong>.</li>
+          <li>Name it something you will recognize later, for example <code>jotty-study</code>. Location can stay as the default.</li>
+          <li>Create the project and wait for the notification, then make sure it is selected.</li>
+        </ol>
+
+        <h2>2. Enable the YouTube Data API v3</h2>
+        <ol>
+          <li>Open <strong>APIs &amp; Services → Library</strong>.</li>
+          <li>Search for <strong>YouTube Data API v3</strong>.</li>
+          <li>Open it and press <strong>Enable</strong>.</li>
+        </ol>
+        <p>
+          If you enable the wrong YouTube API (there are older ones), search returns errors even
+          though the key is valid.
+        </p>
+
+        <h2>3. Create the key</h2>
+        <ol>
+          <li>Open <strong>APIs &amp; Services → Credentials</strong>.</li>
+          <li>Press <strong>Create credentials</strong> and choose <strong>API key</strong>.</li>
+          <li>Copy the key. It starts with <code>AIza</code>.</li>
+        </ol>
+
+        <h2>4. Restrict it the right way</h2>
+        <p>
+          This is the step that breaks most browser extensions. Google offers "HTTP referrers" as the
+          default restriction for website keys. A Chrome extension request has no HTTP referrer, so a
+          referrer restriction produces a 403 even though everything looks correct.
+        </p>
+        <ul>
+          <li><strong>Recommended:</strong> under <em>API restrictions</em>, choose <em>Restrict key</em> and select only <strong>YouTube Data API v3</strong>.</li>
+          <li><strong>Leave application restrictions on None</strong> for a browser extension. There is no server IP to restrict and no referrer to match.</li>
+          <li>If you want extra safety, create a second key only for Jotty and delete it when you stop using the player.</li>
+        </ul>
+        <div class="callout">
+          A restriction by application type is not a security boundary here. The key is stored in your
+          browser profile, and anyone with access to that profile can read extension storage. The API
+          restriction and the daily quota are what limit the damage.
+        </div>
+
+        <h2>5. Add the key to Jotty</h2>
+        <ol>
+          <li>Open the Jotty popup, then <strong>Settings → Focus Player</strong>.</li>
+          <li>Paste the key into the API key field and press <strong>Save key</strong>.</li>
+          <li>Press <strong>Test key</strong>. Jotty makes one channel lookup, which costs a single unit, and reports what came back.</li>
+          <li>Check the quota readout. It should show one unit for the test.</li>
+        </ol>
+        <p>
+          The key is stored under a separate storage key, read only inside the extension's service
+          worker, and never shown again in Settings. It is not included in the JSON export.
+        </p>
+
+        <h2>6. Understand the quota</h2>
+        <table>
+          <thead><tr><th scope="col">Call</th><th scope="col">Units</th><th scope="col">In Jotty</th></tr></thead>
+          <tbody>
+            <tr><td>search.list</td><td>100</td><td>One search</td></tr>
+            <tr><td>videos.list</td><td>1</td><td>Views and durations for those results</td></tr>
+            <tr><td>channels.list</td><td>1</td><td>Key test, channel lookup</td></tr>
+          </tbody>
+        </table>
+        <p>
+          The free daily quota is 10,000 units, which is about 99 searches. Jotty caches a search for
+          thirty minutes in the service worker, so repeating the same query does not spend quota again.
+          Quota resets at midnight Pacific time.
+        </p>
+
+        <h2>Troubleshooting</h2>
+        <h3>"YouTube did not accept this API key"</h3>
+        <p>Check that YouTube Data API v3 is enabled on the same project as the key, and that the key was copied without spaces.</p>
+        <h3>"This key is restricted"</h3>
+        <p>Remove the HTTP referrer restriction. Keep only the API restriction described in step 4.</p>
+        <h3>"The YouTube quota for this key is used up"</h3>
+        <p>
+          Either the daily quota is spent or the project is shared. Wait for the Pacific midnight
+          reset, use another project, or request a quota increase in Google Cloud (which is a paid
+          form, not something Jotty can do).
+        </p>
+        <h3>"No results"</h3>
+        <p>
+          The query may be too narrow, or the results may lack an embeddable player. Jotty requests
+          embeddable videos only. Try the task name without a chapter number.
+        </p>
+
+        <div class="next-actions">
+          <a class="btn btn-primary" href="/#install">Install Jotty</a>
+          <a class="btn" href="../../guides/">More guides</a>
+          <a class="btn" href="../../privacy-policy.html">Privacy policy</a>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p>Jotty is an independent project. Not affiliated with YouTube, Google, or any school.</p>
+          <p>© <span id="year">2026</span> Jotty · MIT · <a href="../../privacy-policy.html">Privacy</a> · <a href="../../terms.html">Terms</a></p>
+        </div>
+      </div>
+    </footer>
+    <script src="../../site-static.js"></script>
+  </body>
+</html>

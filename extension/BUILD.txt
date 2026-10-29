@@ -1,0 +1,8 @@
+Jotty build complete (v1.0.0)
+service worker   73.2 kB
+content script   22.5 kB
+popup            14.1 kB
+options          13.9 kB
+reflection       9.1 kB
+focus player     20.6 kB
+demo engine      48.4 kB

@@ -1,0 +1,27 @@
+# Jotty
+
+> Jotty is a local-first Chrome MV3 study focus coach. It compares the page you are on with the assignment you set, nudges you back when the page is the subject but not the task, delays distracting sites, and asks reflective questions the next morning.
+
+## Facts
+
+- Name: Jotty
+- Category: Chrome extension, study focus and reflection
+- Price: free, MIT licensed, no account, no ads
+- Storage: chrome.storage.local only. No backend and no telemetry.
+- Input to the page judge: page title, URL, channel name on YouTube, description meta tag. No page body.
+- Focus Player: YouTube Data API v3 search with the user's own key; playback through youtube-nocookie.com with related videos limited.
+- Version: 1.0.0
+- Download: https://jotty.vercel.app/releases/jotty-v1.0.0.zip (unpacked extension, MIT)
+- Source: https://github.com/sarang-cmd/jotty
+- Website: https://jotty.vercel.app
+- Privacy: https://jotty.vercel.app/privacy-policy.html
+- Terms: https://jotty.vercel.app/terms.html
+
+## Pages
+
+- [Home](https://jotty.vercel.app/): product explanation and three working examples that run the same judge as the extension.
+- [Morning reflection guide](https://jotty.vercel.app/guides/morning-reflection/)
+- [YouTube without the feed](https://jotty.vercel.app/guides/youtube-without-the-feed/)
+- [Create a free YouTube Data API key](https://jotty.vercel.app/guides/youtube-data-api-key/)
+- [Write a task line the judge can use](https://jotty.vercel.app/guides/focus-session-setup/)
+- [What Jotty stores](https://jotty.vercel.app/guides/what-jotty-stores/)
