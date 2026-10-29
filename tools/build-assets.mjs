@@ -9,7 +9,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const logo = fs.readFileSync(path.join(root, "docs/assets/logo.svg"), "utf8");
 const icon = fs.readFileSync(path.join(root, "docs/assets/icon.svg"), "utf8");
 
 function render(svg, width, background) {
@@ -37,9 +36,7 @@ write(path.join(root, "docs/assets/apple-touch-icon.png"), touch);
 write(path.join(root, "docs/apple-touch-icon.png"), touch);
 write(path.join(root, "extension/icons/icon128.png"), render(icon, 128));
 
-/* Detailed mascot for the README and social card. */
-write(path.join(root, "docs/assets/mascot-512.png"), render(logo, 512));
-write(path.join(root, "docs/assets/mascot-256.png"), render(logo, 256));
+/* The illustrated mascot is a painted raster; see tools/build-mascot.mjs. */
 
 /* Favicons. */
 for (const size of [48, 96, 144, 192, 512]) {

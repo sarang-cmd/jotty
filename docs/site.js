@@ -12,6 +12,43 @@
   const E = window.JottyEngine;
   const $ = (id) => document.getElementById(id);
 
+  /* ---------------------------------------------------------------------
+     CountUp, after the React Bits component, without the React runtime.
+     Numbers ease from their previous value so a verdict change reads as a
+     change rather than a jump. Reduced motion renders the final value.
+     --------------------------------------------------------------------- */
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const counters = new WeakMap();
+
+  function setCount(element, target, format, duration = 460) {
+    if (!element) return;
+    const previous = counters.get(element) || { value: 0, raf: 0 };
+    cancelAnimationFrame(previous.raf);
+
+    if (reducedMotion.matches || previous.value === target) {
+      element.textContent = format(target);
+      counters.set(element, { value: target, raf: 0 });
+      return;
+    }
+
+    const from = previous.value;
+    const start = performance.now();
+    const tick = (now) => {
+      const progress = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.round(from + (target - from) * eased);
+      element.textContent = format(value);
+      if (progress < 1) {
+        counters.set(element, { value, raf: requestAnimationFrame(tick) });
+      } else {
+        element.textContent = format(target);
+        counters.set(element, { value: target, raf: 0 });
+      }
+    };
+    counters.set(element, { value: from, raf: requestAnimationFrame(tick) });
+  }
+
   document.getElementById("year").textContent = String(new Date().getFullYear());
 
   const header = document.getElementById("site-header");
@@ -101,7 +138,7 @@
     $("demo-page-meta").textContent = spec.meta;
     verdict.dataset.verdict = result.verdict;
     $("demo-kicker").textContent = E.VERDICT_LABEL[result.verdict];
-    $("demo-score").textContent = `${Math.round(result.confidence * 100)}% confidence`;
+    setCount($("demo-score"), Math.round(result.confidence * 100), (value) => `${value}% confidence`);
     $("demo-coach").textContent = result.coachLine || "Nothing to judge without a session.";
     $("demo-note").textContent = "";
 
@@ -410,10 +447,11 @@
       (sum, row) => sum + row.hours.reduce((inner, cell) => inner + cell.driftMinutes, 0),
       0
     );
-    $("heatmap-total").textContent =
-      heatmapMetric === "drift"
-        ? `${totalDrift} drift minutes across four example weeks`
-        : `On-task minutes across four example weeks`;
+    if (heatmapMetric === "drift") {
+      setCount($("heatmap-total"), totalDrift, (value) => `${value} drift minutes across four example weeks`);
+    } else {
+      $("heatmap-total").textContent = "On-task minutes across four example weeks";
+    }
     $("heatmap-caption").textContent =
       heatmapMetric === "drift"
         ? "Drift minutes by weekday and hour. Darker cells mean more drift."

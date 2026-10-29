@@ -453,7 +453,7 @@ function bannerTree() {
         t("A local-first study coach for Chrome. No account, no server, MIT licensed.", { fontSize: 18, color: C.soft, marginTop: 26 }),
         t("jotty.vercel.app", { fontFamily: mono, fontSize: 13, color: C.muted, marginTop: 34 }),
       ]),
-      img(logoData, 380, 380, { opacity: 0.98 }),
+      img(logoData, 380, 312, { opacity: 0.98 }),
     ]
   );
 }
@@ -527,14 +527,15 @@ for (const [label, headline, src, w, h, name] of [
 }
 
 const promo = box(
-  { display: "flex", width: 440, height: 280, background: C.paper, padding: 28, gap: 18, alignItems: "center" },
+  { display: "flex", width: 440, height: 280, background: C.paper, padding: 24, gap: 14, alignItems: "center" },
   [
-    img(logoData, 150, 150),
-    box({ display: "flex", flexDirection: "column" }, [
-      t("Jotty", { fontFamily: serif, fontSize: 42, lineHeight: 1 }),
-      t("AI study focus coach", { fontSize: 13, color: C.soft, marginTop: 4 }),
-      t("Notices when you drift.\nAsks about it tomorrow.", { fontFamily: serif, fontSize: 20, lineHeight: 1.2, marginTop: 16 }),
-      t("Local only · No account", { fontFamily: mono, fontSize: 9.5, color: C.muted, marginTop: 16 }),
+    img(logoData, 124, 102),
+    box({ display: "flex", flexDirection: "column", width: 254 }, [
+      t("Jotty", { fontFamily: serif, fontSize: 38, lineHeight: 1 }),
+      t("AI study focus coach", { fontSize: 12.5, color: C.soft, marginTop: 4 }),
+      t("Notices when you drift.", { fontFamily: serif, fontSize: 17, lineHeight: 1.25, marginTop: 14 }),
+      t("Asks about it tomorrow.", { fontFamily: serif, fontSize: 17, lineHeight: 1.25, marginTop: 2 }),
+      t("Local only · No account", { fontFamily: mono, fontSize: 9, color: C.muted, marginTop: 14 }),
     ]),
   ]
 );

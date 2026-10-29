@@ -130,7 +130,7 @@ const required = [
   "docs/guides/index.html",
   "docs/font-licenses.html",
   "docs/assets/engine.js",
-  "docs/assets/logo.svg",
+  "docs/assets/mascot-512.png",
   "docs/assets/icon-48.png",
   "docs/assets/banner-social-1280x640.png",
   "docs/releases/jotty-v1.0.0.zip",

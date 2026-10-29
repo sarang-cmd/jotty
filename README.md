@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/assets/logo.svg" width="96" height="96" alt="Jotty mascot: a sage-green blob holding a pencil over an open notebook" />
+<img src="docs/assets/mascot-512.png" width="150" alt="Jotty mascot: a sage-green blob holding a pencil over an open notebook" />
 
 # Jotty
 
@@ -323,8 +323,10 @@ Search results are cached in memory for thirty minutes. Quota use is counted and
 │       ├── storage.js              # one versioned object + guarded key reader
 │       └── text.js                 # tokenising, stemming, dates, durations
 ├── tests/                          # 66 Node tests: logic, storage, security, pipeline
+├── assets/brand/mascot.png         # source illustration, composited on paper
 ├── tools/
 │   ├── build-assets.mjs            # rasterises icons, favicons, badges
+│   ├── build-mascot.mjs             # resizes the illustrated mascot
 │   ├── build-previews.mjs          # renders README and store previews with satori
 │   ├── check-docs.mjs              # link, asset, a11y and copy checks for docs/
 │   └── render-svg.mjs              # small SVG to PNG helper
@@ -335,7 +337,8 @@ Search results are cached in memory for thirty minutes. Quota use is counted and
     ├── site.js                     # demo wiring; no third-party code
     ├── assets/
     │   ├── engine.js               # generated demo bundle
-    │   ├── logo.svg, icon.svg      # mascot and simplified mark
+    │   ├── mascot-512.png, mascot-256.png  # illustrated mascot
+    │   ├── icon.svg                # simplified toolbar mark
     │   ├── fonts/                  # self-hosted woff2 (no font CDN)
     │   ├── screenshots/            # interface previews used above
     │   ├── architecture.svg
@@ -412,6 +415,7 @@ npm run zip        # build, then package extension/ into jotty-v1.0.0.zip
 - **Direction:** warm paper, ink, one moss accent and a sage mascot. The interface borrows the restraint of a product page rather than the vocabulary of a SaaS template: no gradient orbs, no glass panels, no icon grid, no three-card feature row.
 - **Type:** Instrument Serif for display and questions, Public Sans for reading, IBM Plex Mono only for clocks, dates and quantities. All self-hosted under the SIL OFL. No Inter, Geist, Space Grotesk or icon font.
 - **Tools:** the site is static HTML, CSS and vanilla JavaScript because that is the smallest thing that supports the brief. Radix Primitives and Motion were considered and deliberately not shipped: both expect React or a runtime this page does not have, and the few components needed (a disclosure list, a focus-trapped delay screen, a toast with a status role) are implemented natively with the same accessibility rules. The demo panels keep one state object, update it through named transitions, and respect `prefers-reduced-motion`, which is the part of the Motion approach that mattered here.
+- **Motion:** two behaviours are adapted from React Bits and written without the React or Tailwind dependency: a count-up for the demo confidence and heatmap total, and a scroll reveal for section headings and guide rows. Both are short, respect `prefers-reduced-motion`, and leave the content fully visible when unsupported. Canvas UI was not used: its components are WebGL and WebGPU canvas effects that would replace the static page with a runtime and contradict the palette rules above.
 - **Previews:** the five interface images are vector compositions rendered from the shipped palette and type by `tools/build-previews.mjs`. They are labelled as previews on the website. Nothing in them claims a fake statistic; sample view counts are intentionally left to the API.
 
 ---
