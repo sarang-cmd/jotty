@@ -1693,6 +1693,49 @@ button {
   margin-top: 8px;
 }
 
+/* ---------- React shell ---------- */
+
+#static-shell {
+  min-height: 100vh;
+  background: var(--paper);
+}
+
+body.app-mounted #static-shell {
+  display: none;
+}
+
+.static-bar {
+  border-bottom: 1px solid var(--line);
+  background: var(--paper-raised);
+}
+
+.static-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.static-main {
+  padding-top: 64px;
+  padding-bottom: 64px;
+  max-width: 64ch;
+}
+
+.static-main h1 {
+  font-family: var(--serif);
+  font-size: clamp(38px, 6vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 14px 0 18px;
+}
+
+.static-main .hero-lede {
+  max-width: 56ch;
+}
+
 /* ---------- faq ---------- */
 
 .faq-list {
@@ -1739,6 +1782,76 @@ button {
   line-height: 1.6;
   color: var(--ink-soft);
   max-width: 72ch;
+}
+
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+}
+
+.faq-header {
+  margin: 0;
+}
+
+.faq-trigger {
+  position: relative;
+  width: 100%;
+  padding: 18px 40px 18px 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-trigger::after {
+  content: "+";
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--mono);
+  font-size: 18px;
+  color: var(--muted);
+}
+
+.faq-trigger[data-state="open"]::after {
+  content: "\2212";
+}
+
+.faq-content {
+  overflow: hidden;
+}
+
+.faq-content[data-state="open"] {
+  animation: faq-open 180ms ease-out;
+}
+
+.faq-content[data-state="closed"] {
+  animation: faq-close 140ms ease-in;
+}
+
+@keyframes faq-open {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes faq-close {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 .faq-list .answer p + p {

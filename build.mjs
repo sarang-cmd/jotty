@@ -6,6 +6,7 @@
  * src/popup|options|reflection|focus-> extension/*.js           (IIFE page controllers)
  * src/ui/theme.css                 -> extension/theme.css
  * src/demo/engine.js               -> docs/assets/engine.js     (same judge, used by the site demo)
+ * src/web/main.jsx                  -> docs/app.js               (React landing page)
  */
 
 import * as esbuild from "esbuild";
@@ -72,6 +73,17 @@ await Promise.all([
     format: "iife",
     globalName: "JottyEngine",
   }),
+  esbuild.build({
+    ...shared,
+    entryPoints: [resolve(rootDir, "src/web/main.jsx")],
+    outfile: resolve(rootDir, "docs/app.js"),
+    format: "iife",
+    jsx: "automatic",
+    minify: true,
+    define: {
+      "process.env.NODE_ENV": JSON.stringify("production"),
+    },
+  }),
 ]);
 
 await copyFile(resolve(rootDir, "src/ui/theme.css"), resolve(extDir, "theme.css"));
@@ -90,6 +102,7 @@ const sizes = [
   ["extension/reflection.js", "reflection"],
   ["extension/focus.js", "focus player"],
   ["docs/assets/engine.js", "demo engine"],
+  ["docs/app.js", "landing app"],
 ];
 
 const lines = [];

@@ -130,6 +130,7 @@ const required = [
   "docs/guides/index.html",
   "docs/font-licenses.html",
   "docs/assets/engine.js",
+  "docs/app.js",
   "docs/assets/mascot-512.png",
   "docs/assets/icon-48.png",
   "docs/assets/banner-social-1280x640.png",
