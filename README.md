@@ -286,7 +286,7 @@ Search results are cached in memory for thirty minutes. Quota use is counted and
 
 ```text
 .
-├── build.mjs                       # esbuild: worker (ESM), content + pages (IIFE), demo engine
+├── build.mjs                       # esbuild: worker, content, pages, demo engine, React landing
 ├── serve-docs.mjs                  # zero-dependency preview server on 0.0.0.0:4173
 ├── vercel.json                     # static deploy from docs/, cache + zip headers
 ├── package.json                    # zero runtime dependencies; esbuild and build tools only
@@ -311,6 +311,12 @@ Search results are cached in memory for thirty minutes. Quota use is counted and
 │   ├── reflection/reflection.js    # question rendering and plan display
 │   ├── focus/focus.js              # player search, ranking, clean embed
 │   ├── demo/engine.js              # the bundle exported to the website demo
+│   ├── web/
+│   │   ├── main.jsx                # mounts the React landing page
+│   │   ├── landing/Landing.jsx     # page composition, Motion and Radix
+│   │   ├── landing/sections.jsx    # header, hero, sections and footer as components
+│   │   ├── landing/FaqSection.jsx  # Radix Accordion
+│   │   └── landing/controller.js   # the demo logic, mounted after React commits
 │   ├── ui/theme.css                # source for extension/theme.css
 │   ├── ui/mark.js                  # inline mascot and arrow for shadow DOM
 │   └── lib/
@@ -322,19 +328,20 @@ Search results are cached in memory for thirty minutes. Quota use is counted and
 │       ├── session.js              # clock arithmetic
 │       ├── storage.js              # one versioned object + guarded key reader
 │       └── text.js                 # tokenising, stemming, dates, durations
-├── tests/                          # 66 Node tests: logic, storage, security, pipeline
+├── tests/                          # 67 Node tests: logic, storage, security, pipeline, React landing
 ├── assets/brand/mascot.png         # source illustration, composited on paper
 ├── tools/
 │   ├── build-assets.mjs            # rasterises icons, favicons, badges
 │   ├── build-mascot.mjs             # resizes the illustrated mascot
 │   ├── build-previews.mjs          # renders README and store previews with satori
+│   ├── build-landing-jsx.mjs       # converts the original landing markup to JSX
 │   ├── check-docs.mjs              # link, asset, a11y and copy checks for docs/
 │   └── render-svg.mjs              # small SVG to PNG helper
 ├── store-assets/                   # Chrome Web Store icon, promo tile and 1280x800 previews
 └── docs/                           # static site -> https://jotty.vercel.app
     ├── index.html                  # landing page with three live demos
     ├── styles.css                  # warm paper design system
-    ├── site.js                     # demo wiring; no third-party code
+    ├── app.js                      # React landing bundle (esbuild)
     ├── assets/
     │   ├── engine.js               # generated demo bundle
     │   ├── mascot-512.png, mascot-256.png  # illustrated mascot
@@ -360,8 +367,8 @@ Search results are cached in memory for thirty minutes. Quota use is counted and
 
 ```bash
 npm install
-npm run build      # bundles src/ into extension/ and docs/assets/engine.js
-npm test           # 66 tests: logic, storage, security, end-to-end pipeline
+npm run build      # bundles src/ into extension/, docs/assets/engine.js and docs/app.js
+npm test           # 67 tests: logic, storage, security, pipeline, landing smoke
 npm run site       # http://localhost:4173
 npm run check      # link, asset, label and copy checks for docs/
 npm run assets     # regenerate icons, favicons and badges from the SVG marks
@@ -381,11 +388,12 @@ npm run zip        # build, then package extension/ into jotty-v1.0.0.zip
 | `storage.test.js` | Defaults, normalisation, key isolation, export excludes the key, quota reset, wipe |
 | `security.test.js` | Only the worker reads the key; content scripts make no requests; no remote scripts or analytics; narrow host permissions |
 | `pipeline.test.js` | A Tuesday session becomes slices, events, a Wednesday reflection and a plan |
+| `landing.test.js` | Mounts the built React landing page in jsdom, checks ten sections, the demo verdict switch, the reflection fieldsets and seven Radix FAQ triggers, with zero console errors |
 
 ### What was tested, and what was not
 
-- **Tested:** all 66 Node tests; the build and bundle sizes; every internal link and asset with `npm run check`; the static server and every page response with `curl`; the rendered preview images and mascot at multiple sizes; the demo engine's output against the same functions used in the tests.
-- **Not tested in this environment:** a real Chrome install with the extension loaded, because the sandbox has no browser binary. There are no automated DOM or screenshot tests. The layout was written against the shipped CSS and reviewed through the rendered previews, not through a browser viewport. Load it unpacked before trusting it for a term.
+- **Tested:** all 67 Node tests; the build and bundle sizes; every internal link and asset with `npm run check`; the static server and every page response with `curl`; the rendered preview images and mascot at multiple sizes; the demo engine's output against the same functions used in the tests; and a jsdom smoke run that mounts `docs/app.js`, executes the demo controller and checks the rendered sections, demo verdict and seven FAQ triggers with zero console errors.
+- **Not tested in this environment:** a real Chrome install with the extension loaded, because the sandbox has no browser binary. The React landing page is checked by the jsdom smoke run, not by a browser viewport, so Motion timing, Radix focus rings and the exact layout were reviewed through code and the rendered previews. Load the extension unpacked and open the site in Chrome before trusting it for a term.
 - **Not verified:** availability of the name Jotty, a Chrome Web Store listing, or a production domain. The site currently assumes `jotty.vercel.app`.
 
 ---
@@ -414,8 +422,8 @@ npm run zip        # build, then package extension/ into jotty-v1.0.0.zip
 
 - **Direction:** warm paper, ink, one moss accent and a sage mascot. The interface borrows the restraint of a product page rather than the vocabulary of a SaaS template: no gradient orbs, no glass panels, no icon grid, no three-card feature row.
 - **Type:** Instrument Serif for display and questions, Public Sans for reading, IBM Plex Mono only for clocks, dates and quantities. All self-hosted under the SIL OFL. No Inter, Geist, Space Grotesk or icon font.
-- **Tools:** the site is static HTML, CSS and vanilla JavaScript because that is the smallest thing that supports the brief. Radix Primitives and Motion were considered and deliberately not shipped: both expect React or a runtime this page does not have, and the few components needed (a disclosure list, a focus-trapped delay screen, a toast with a status role) are implemented natively with the same accessibility rules. The demo panels keep one state object, update it through named transitions, and respect `prefers-reduced-motion`, which is the part of the Motion approach that mattered here.
-- **Motion:** two behaviours are adapted from React Bits and written without the React or Tailwind dependency: a count-up for the demo confidence and heatmap total, and a scroll reveal for section headings and guide rows. Both are short, respect `prefers-reduced-motion`, and leave the content fully visible when unsupported. Canvas UI was not used: its components are WebGL and WebGPU canvas effects that would replace the static page with a runtime and contradict the palette rules above.
+- **Tools:** the landing page is React 19, bundled by esbuild into `docs/app.js`, with Motion for the hero entrance and Radix Accordion for the FAQ. This is the same shape as the author's other extension site: React plus Radix plus Motion, no framework, no server runtime, and a static `docs/` output that Vercel serves without a build step. The extension itself stays dependency free.
+- **Motion:** the hero enters with a short Motion transition, the FAQ uses Radix Accordion, and two React Bits behaviours are adapted to the palette: a count-up for the demo confidence and heatmap total, and a scroll reveal for section headings and guide rows. Everything respects `prefers-reduced-motion` and leaves content visible when a feature is unsupported. Canvas UI was not used: its components are WebGL and WebGPU canvas effects that would replace the page with a full-screen runtime and contradict the palette rules above.
 - **Previews:** the five interface images are vector compositions rendered from the shipped palette and type by `tools/build-previews.mjs`. They are labelled as previews on the website. Nothing in them claims a fake statistic; sample view counts are intentionally left to the API.
 
 ---

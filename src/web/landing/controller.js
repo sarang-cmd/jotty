@@ -1,19 +1,24 @@
 /**
- * Landing page behaviour.
+ * Landing page behaviour, mounted after React's first commit.
  *
- * The three interactive panels are not illustrations. They call the same
- * modules that are bundled into the extension (docs/assets/engine.js), with
- * example data. No network requests, no third-party scripts.
+ * The interactive panels are not illustrations. They call the same modules
+ * that are bundled into the extension (docs/assets/engine.js, loaded before
+ * this bundle), with example data. No network requests, no third-party
+ * scripts. `initLanding` is idempotent: React effects can call it twice
+ * without attaching duplicate listeners.
  */
 
-(function () {
-  "use strict";
+let mounted = false;
+
+export function initLanding() {
+  if (mounted) return;
+  mounted = true;
 
   const E = window.JottyEngine;
   const $ = (id) => document.getElementById(id);
 
   /* ---------------------------------------------------------------------
-     CountUp, after the React Bits component, without the React runtime.
+     CountUp, after the React Bits component, without its React dependency.
      Numbers ease from their previous value so a verdict change reads as a
      change rather than a jump. Reduced motion renders the final value.
      --------------------------------------------------------------------- */
@@ -554,4 +559,4 @@
       "Back to the preview"
     );
   });
-})();
+}

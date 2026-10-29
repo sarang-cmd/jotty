@@ -54,7 +54,11 @@ test("content scripts make no network requests", () => {
 
 test("the only external API host in source is the YouTube Data API", () => {
   const hosts = new Set();
-  for (const file of srcFiles) {
+  // src/web is the landing page: its "https://" strings are links in marketing
+  // copy (GitHub, the example task document), never request targets. The test
+  // below proves that separately.
+  const runtimeFiles = srcFiles.filter((file) => !file.includes(`${path.sep}web${path.sep}`));
+  for (const file of runtimeFiles) {
     const source = read(file);
     for (const match of source.matchAll(/https:\/\/([a-z0-9.-]+)/gi)) {
       hosts.add(match[1]);
@@ -72,6 +76,12 @@ test("the only external API host in source is the YouTube Data API", () => {
   ]);
   const unexpected = [...hosts].filter((host) => !allowed.has(host) && !host.endsWith("schema.org"));
   assert.deepEqual(unexpected, []);
+
+  for (const file of srcFiles.filter((file) => file.includes(`${path.sep}web${path.sep}`))) {
+    const source = read(file);
+    assert.equal(/\bfetch\s*\(/.test(source), false, `${file} calls fetch`);
+    assert.equal(/XMLHttpRequest/.test(source), false, `${file} uses XHR`);
+  }
 
   // The project domain may appear as an anchor, never as a request target.
   for (const file of srcFiles) {
