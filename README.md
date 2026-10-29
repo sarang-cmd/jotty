@@ -138,6 +138,19 @@ Then load the **`extension/`** folder via **Load unpacked**. The release ZIP is 
 
 ---
 
+## Providers and services
+
+Jotty has no model provider and no account layer. The judge is a deterministic rule engine that runs inside the extension, so it works offline and costs nothing to run.
+
+| Service | What it is used for | Required? | Who pays |
+| :--- | :--- | :--- | :--- |
+| None (local engine) | Relevance verdicts, habit log, heatmap, reflections | Always | Nobody. It runs in the browser. |
+| YouTube Data API v3 | Focus Player search and video metadata | Optional. Only search needs it. | You, with your own free Google Cloud key. 10,000 units a day by default. |
+| youtube-nocookie.com | Playback of the video you chose | Optional | Nobody. It is the standard YouTube embed. |
+| Self-hosted fonts | Instrument Serif, Public Sans, IBM Plex Mono | Always | Nobody. The woff2 files ship with the extension and the site. |
+
+There is no other provider: no analytics, no crash reporting, no font CDN, no hosted database, no AI API. If the key is missing, every part of Jotty except player search still works.
+
 ## What runs where
 
 <div align="center">
